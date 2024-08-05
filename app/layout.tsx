@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { Fraunces, Barlow } from "next/font/google";
-import "./globals.css";
 import { Providers } from "@/components/providers";
 
 const barlowFont = Barlow({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-barlow",
+  display: "swap",
 });
 
 const frauncesFont = Fraunces({
   subsets: ["latin"],
   weight: ["400", "900"],
   variable: "--font-fraunces",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
