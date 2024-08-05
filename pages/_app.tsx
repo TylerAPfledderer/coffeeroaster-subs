@@ -2,6 +2,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import customTheme from "../theme";
 import { Barlow, Fraunces } from "next/font/google";
+import type { ReactElement, ReactNode } from "react";
+import type { NextPage } from "next/types";
 
 const barlowFont = Barlow({
   subsets: ["latin"],
@@ -17,7 +19,17 @@ const frauncesFont = Fraunces({
   display: "swap",
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
       <style jsx global>
@@ -29,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
       </style>
       <ChakraProvider theme={customTheme}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ChakraProvider>
     </>
   );

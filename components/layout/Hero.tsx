@@ -1,0 +1,62 @@
+import { useContext } from "react";
+import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/next-js";
+import { useRouter } from "next/router";
+
+export interface HeroData {
+  title: string;
+  description: string;
+  imageSet: {
+    base: string;
+    md: string;
+    xl: string;
+  }; // Extending Chakra's bgImage prop types
+}
+
+type HeroProps = {
+  heroData: HeroData;
+};
+
+const Hero = ({ heroData }: HeroProps) => {
+  const { imageSet, description, title } = heroData;
+
+  const { asPath } = useRouter();
+
+  return (
+    <Flex
+      as="section"
+      direction="column"
+      alignItems={{ base: "center", md: "flex-start" }}
+      bgImage={imageSet}
+      bgPos="right"
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      color="white"
+      textAlign={{ md: "left" }}
+      padding={{ base: "100px 24px", md: "100px 56px", xl: "100px 88px" }}
+      borderRadius="10px"
+      marginTop="76px"
+    >
+      <Stack gap="12" width="clamp(17.44rem, 20vw + 12.8rem, 30.75rem)">
+        <Stack spacing="6">
+          <Heading as="h1" size="4xl">
+            {title}
+          </Heading>
+          <Text maxWidth="445px">{description}</Text>
+        </Stack>
+        {asPath === "/" && (
+          <Link
+            alignSelf="flex-start"
+            href="/subscribe"
+            data-testid="hero-button"
+            variant="primaryButton"
+          >
+            Create your plan
+          </Link>
+        )}
+      </Stack>
+    </Flex>
+  );
+};
+
+export default Hero;
