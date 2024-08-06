@@ -5,6 +5,7 @@ import type { HeroData } from "@/components/layout/Hero";
 import coffeeMobileImg from "../public/images/home/hero/coffeepress-mobile.jpg";
 import coffeeTabletImg from "../public/images/home/hero/coffeepress-tablet.jpg";
 import coffeeDesktopImg from "../public/images/home/hero/coffeepress-desktop.jpg";
+import { CollectionSection } from "@/components/home/CollectionSection";
 
 export const getStaticProps = (() => {
   const indexHero = {
@@ -28,7 +29,11 @@ export const getStaticProps = (() => {
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <CollectionSection />
+    </>
+  );
 };
 
 Home.getLayout = function getLayout(page) {
