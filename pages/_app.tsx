@@ -2,8 +2,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import customTheme from "../theme";
 import { Barlow, Fraunces } from "next/font/google";
-import type { ReactElement, ReactNode } from "react";
+import { useEffect, type ReactElement, type ReactNode } from "react";
 import type { NextPage } from "next/types";
+import "global.css";
+import sal from "sal.js";
 
 const barlowFont = Barlow({
   subsets: ["latin"],
@@ -28,6 +30,9 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  useEffect(() => {
+    sal();
+  });
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
   return (

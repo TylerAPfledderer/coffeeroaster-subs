@@ -6,6 +6,7 @@ import coffeeMobileImg from "../public/images/home/hero/coffeepress-mobile.jpg";
 import coffeeTabletImg from "../public/images/home/hero/coffeepress-tablet.jpg";
 import coffeeDesktopImg from "../public/images/home/hero/coffeepress-desktop.jpg";
 import { CollectionSection } from "@/components/home/CollectionSection";
+import { FeaturesSection } from "@/components/home/FeaturesSection";
 
 export const getStaticProps = (() => {
   const indexHero = {
@@ -32,6 +33,7 @@ const Home: NextPageWithLayout<
   return (
     <>
       <CollectionSection />
+      <FeaturesSection />
     </>
   );
 };
