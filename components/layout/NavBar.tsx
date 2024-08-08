@@ -16,7 +16,7 @@ import NavList from "./NavList";
  * Component at the top of the page wrapping
  * the logo and the main navigation
  */
-const NavBar = () => {
+function NavBar() {
   // Toggling Nav Menu (on the small screen)
   const { isOpen: isMenuOpen, onToggle: setMenuToggle } = useDisclosure();
   const [isGreaterThan768] = useMediaQuery("(min-width: 768px)");
@@ -93,6 +93,6 @@ const NavBar = () => {
       </Flex>
     </Box>
   );
-};
+}
 
 export default NavBar;

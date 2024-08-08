@@ -10,9 +10,9 @@ import {
   VisuallyHidden,
 } from "@chakra-ui/react";
 import uuid from "react-uuid";
+import type { SVGAttributes } from "react";
 import Logo from "./Logo";
 import NavList from "./NavList";
-import type { SVGAttributes } from "react";
 
 interface SocialLinkObj {
   name: string;
@@ -23,7 +23,7 @@ interface SocialLinkObj {
 /**
  * Footer landmark render through the layout on each page
  */
-const Footer = () => {
+function Footer() {
   /**
    * Array of social link svg info for iteration in the Footer
    * @property name: string - name of the social link
@@ -128,6 +128,6 @@ const Footer = () => {
       </HStack>
     </Flex>
   );
-};
+}
 
 export default Footer;

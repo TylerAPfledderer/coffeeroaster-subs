@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
 import { useRouter } from "next/router";
 
@@ -17,7 +16,7 @@ type HeroProps = {
   heroData: HeroData;
 };
 
-const Hero = ({ heroData }: HeroProps) => {
+function Hero({ heroData }: HeroProps) {
   const { imageSet, description, title } = heroData;
 
   const { asPath } = useRouter();
@@ -57,6 +56,6 @@ const Hero = ({ heroData }: HeroProps) => {
       </Stack>
     </Flex>
   );
-};
+}
 
 export default Hero;

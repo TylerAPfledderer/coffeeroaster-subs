@@ -9,7 +9,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-export const Layout = ({ children, heroData }: LayoutProps) => {
+export function Layout({ children, heroData }: LayoutProps) {
   return (
     <Box
       textAlign="center"
@@ -25,4 +25,4 @@ export const Layout = ({ children, heroData }: LayoutProps) => {
       <Footer />
     </Box>
   );
-};
+}

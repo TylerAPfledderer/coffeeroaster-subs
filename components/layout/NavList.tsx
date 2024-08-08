@@ -12,8 +12,8 @@ interface NavLinkProps {
   path: string;
 }
 
-const NavListLink = ({ name, path }: NavLinkProps) => (
-  <ListItem>
+function NavListLink({ name, path }: NavLinkProps) {
+  return <ListItem>
     <Link
       href={path}
       display="flex"
@@ -25,7 +25,7 @@ const NavListLink = ({ name, path }: NavLinkProps) => (
       {name}
     </Link>
   </ListItem>
-);
+}
 
 /**
  *

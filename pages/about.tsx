@@ -1,4 +1,3 @@
-import type { NextPageWithLayout } from "./_app";
 import Image from "next/image";
 import { Layout } from "@/components/layout";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -27,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import headquarterInfo from "@/data/headquarterInfo.json";
 import { Link } from "@chakra-ui/next-js";
+import type { NextPageWithLayout } from "./_app";
 
 export const getStaticProps = (() => {
   const aboutHero = {

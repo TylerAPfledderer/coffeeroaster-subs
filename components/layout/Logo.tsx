@@ -4,8 +4,8 @@ type LogoProps = {
   hasDarkBg?: boolean;
 };
 
-const Logo = ({ hasDarkBg = false }: LogoProps) => (
-  <Icon viewBox="0 0 237 27" boxSize="full" display="inherit">
+function Logo({ hasDarkBg = false }: LogoProps) {
+  return <Icon viewBox="0 0 237 27" boxSize="full" display="inherit">
     {/* Setting display="inherit" removes the extra vertical space within the parent caused  by setting the default value to 'inline'. 'inherit' converts the value to 'block' which comes from the parent. */}
     <g fillRule="nonzero" fill="none">
       <path
@@ -19,6 +19,6 @@ const Logo = ({ hasDarkBg = false }: LogoProps) => (
       />
     </g>
   </Icon>
-);
+}
 
 export default Logo;

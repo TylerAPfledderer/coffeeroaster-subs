@@ -13,7 +13,7 @@ import Image from "next/image";
 import featuresInfo from "@/data/featuresInfo.json";
 import MainSection from "../MainSection";
 
-export const FeaturesSection = () => {
+export function FeaturesSection() {
   // For use with collectionInfo and featureInfo scroll reveals
   const [isLessThan1280] = useMediaQuery("(max-width: 1280px)");
 
@@ -79,4 +79,4 @@ export const FeaturesSection = () => {
       </Box>
     </MainSection>
   );
-};
+}

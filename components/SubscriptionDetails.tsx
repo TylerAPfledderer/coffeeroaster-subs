@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import subDetails from "@/data/subDetails.json";
-import MainSection from "./MainSection";
 import { Flex, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
+import MainSection from "./MainSection";
 
 type SubscriptionDetailsProps = {
   /**
@@ -20,9 +20,9 @@ type SubscriptionDetailsProps = {
  *
  * @param {true | undefined} props.onSubscribePage - Used for styling changes if the component is rendered on the subscribe page
  */
-export const SubscriptionDetails = ({
+export function SubscriptionDetails({
   onSubscribePage,
-}: SubscriptionDetailsProps) => {
+}: SubscriptionDetailsProps) {
   useEffect(() => {
     /** Throw runtime error if the onSubscribePage prop is not used in the correct place */
     if (onSubscribePage && window.location.pathname !== "/subscribe") {
@@ -30,6 +30,7 @@ export const SubscriptionDetails = ({
         "onSubscribePage styles and rendering are only for the Subscribe page!",
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -138,4 +139,4 @@ export const SubscriptionDetails = ({
       )}
     </MainSection>
   );
-};
+}

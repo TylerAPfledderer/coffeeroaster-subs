@@ -1,4 +1,3 @@
-import type { NextPageWithLayout } from "./_app";
 import { Layout } from "@/components/layout";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { HeroData } from "@/components/layout/Hero";
@@ -8,6 +7,7 @@ import coffeeDesktopImg from "@/images/home/hero/coffeepress-desktop.jpg";
 import { CollectionSection } from "@/components/home/CollectionSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { SubscriptionDetails } from "@/components/SubscriptionDetails";
+import type { NextPageWithLayout } from "./_app";
 
 export const getStaticProps = (() => {
   const indexHero = {
@@ -30,15 +30,13 @@ export const getStaticProps = (() => {
 
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = () => {
-  return (
+> = () => (
     <>
       <CollectionSection />
       <FeaturesSection />
       <SubscriptionDetails />
     </>
   );
-};
 
 Home.getLayout = function getLayout(page) {
   const { heroData } = page.props;

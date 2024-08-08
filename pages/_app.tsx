@@ -1,11 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import customTheme from "../theme";
 import { Barlow, Fraunces } from "next/font/google";
 import { useEffect, type ReactElement, type ReactNode } from "react";
 import type { NextPage } from "next/types";
 import "global.css";
 import sal from "sal.js";
+import customTheme from "../theme";
 
 const barlowFont = Barlow({
   subsets: ["latin"],

@@ -11,7 +11,7 @@ import Image from "next/image";
 import collectionInfo from "@/data/collectionInfo.json";
 import MainSection from "../MainSection";
 
-export const CollectionSection = () => {
+export function CollectionSection() {
   // For use with collectionInfo and featureInfo scroll reveals
   const [isLessThan1280] = useMediaQuery("(max-width: 1280px)");
 
@@ -93,4 +93,4 @@ export const CollectionSection = () => {
       </Stack>
     </MainSection>
   );
-};
+}
