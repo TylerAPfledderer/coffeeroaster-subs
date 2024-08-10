@@ -104,6 +104,7 @@ export function SubscriptionDetails({
                 color="accentPrimary.500"
                 fontFamily="heading"
                 fontSize="72px"
+                fontWeight="bold"
                 lineHeight="1"
                 marginBottom={{ md: "24px" }}
                 maxWidth="100%"
