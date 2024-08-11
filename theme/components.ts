@@ -16,8 +16,8 @@ export const components: Record<string, StyleConfig> = {
         lineHeight: "3rem",
       },
       xl: {
-        fontSize: "clamp(1.44rem, 0.5vw + 1.3rem, 1.777rem)",
-        lineHeight: "3rem",
+        fontSize: "xl",
+        lineHeight: "1.5",
       },
     },
     defaultProps: {

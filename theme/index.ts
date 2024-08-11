@@ -23,6 +23,8 @@ const theme = extendTheme({
   space: {
     "ms-1": "1.5rem",
     "ms-2": "3rem",
+    "ms-3": "4.5rem",
+    "ms-4": "6rem",
   },
   breakpoints: {
     "2xl": "1440px",

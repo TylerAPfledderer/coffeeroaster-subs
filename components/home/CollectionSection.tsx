@@ -1,5 +1,4 @@
 import {
-  Box,
   Heading,
   List,
   ListItem,
@@ -19,16 +18,21 @@ export function CollectionSection() {
     <MainSection>
       <Heading
         bgGradient={{
+          base: "linear(gray.500 50%, transparent)",
           md: "linear(gray.500 25%, transparent)",
           xl: "linear(gray.500 50%, transparent)",
         }}
-        bgColor={{ base: "gray.500", md: "transparent" }}
+        bgColor="transparent"
         bgClip="text"
         fill="transparent"
-        filter={{ md: "opacity(0.5)", xl: "opacity(0.8)" }}
-        fontSize={{ base: "40px", md: "96px", xl: "150px" }}
-        lineHeight={{ base: "72px", xl: "7rem" }}
-        marginBottom="8"
+        filter={{
+          base: "opacity(0.6)",
+          md: "opacity(0.5)",
+          xl: "opacity(0.8)",
+        }}
+        fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
+        lineHeight="100%"
+        marginBottom="ms-2"
         position={{ md: "absolute" }}
         textTransform="lowercase"
         zIndex={{ md: "-1" }}
@@ -37,9 +41,10 @@ export function CollectionSection() {
       </Heading>
       <Stack
         as={List}
-        spacing={{ base: "56px", xl: "8" }}
+        spacing={{ base: "ms-4", xl: "ms-2" }}
         overflow="visible"
         maxWidth="full"
+        mt={{ md: "ms-2", xl: "ms-4" }}
         paddingX={{ md: "56px" }}
         direction={{ base: "column", xl: "row" }}
       >
@@ -72,7 +77,8 @@ export function CollectionSection() {
                   height: "184px",
                 }}
               />
-              <Box
+              <Stack
+                gap="ms-1"
                 textAlign={{ md: "left", xl: "center" }}
                 marginLeft={{ md: "36px", xl: 0 }}
                 maxWidth="255px"
@@ -81,12 +87,12 @@ export function CollectionSection() {
                   as="h3"
                   size="xl"
                   textTransform="capitalize"
-                  mb={{ base: "4", md: "6" }}
+                  // mb={{ base: "4", md: "6" }}
                 >
                   {title}
                 </Heading>
                 <Text>{description}</Text>
-              </Box>
+              </Stack>
             </ListItem>
           );
         })}
