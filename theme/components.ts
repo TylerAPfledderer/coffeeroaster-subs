@@ -4,8 +4,8 @@ export const components: Record<string, StyleConfig> = {
   Heading: {
     sizes: {
       "4xl": {
-        fontSize: "clamp(2.488rem, 2.6vw + 1.9rem, 4.209rem)",
-        lineHeight: "clamp(3rem, 4.5vw + 1.9rem, 6rem)",
+        fontSize: ["2xl", null, "3xl", null, null, "4xl"],
+        lineHeight: ["2", null, "2.5", null, null, "3.5"],
       },
       "3xl": {
         fontSize: "clamp(2.074rem, 1.6vw + 1.7rem, 3.157rem)",

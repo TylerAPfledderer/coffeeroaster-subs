@@ -36,16 +36,16 @@ function Hero({ heroData }: HeroProps) {
       borderRadius="10px"
       marginTop="76px"
     >
-      <Stack gap="12" width="clamp(17.44rem, 20vw + 12.8rem, 30.75rem)">
-        <Stack spacing="6">
+      <Stack gap="ms-2" width="clamp(17.44rem, 20vw + 12.8rem, 30.75rem)">
+        <Stack spacing="ms-1">
           <Heading as="h1" size="4xl">
             {title}
           </Heading>
-          <Text maxWidth="445px">{description}</Text>
+          <Text>{description}</Text>
         </Stack>
         {asPath === "/" && (
           <Link
-            alignSelf="flex-start"
+            alignSelf={{ base: "center", md: "flex-start" }}
             href="/subscribe"
             data-testid="hero-button"
             variant="primaryButton"
