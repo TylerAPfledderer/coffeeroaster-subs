@@ -22,14 +22,14 @@ export function FeaturesSection() {
       <Box
         bg="darkGray.500"
         borderRadius="10px"
-        height={{ base: "902px", md: "573px" }}
+        height={{ base: "4xl", md: "xl", xl: "md" }}
         position="absolute"
         zIndex="-2"
         top="0"
         width="full"
       />
       <Box px={{ base: "6", md: "14" }} pt="16">
-        <VStack spacing="6" marginBottom="72px" maxWidth="540px" mx="auto">
+        <VStack spacing="ms-1" marginBottom="ms-2" maxWidth="540px" mx="auto">
           <Heading>Why choose us?</Heading>
           <Text>
             A large part of our role is choosing which particular coffees will
@@ -38,7 +38,7 @@ export function FeaturesSection() {
             level.
           </Text>
         </VStack>
-        <Stack as={List} spacing="6" direction={{ base: "column", xl: "row" }}>
+        <Center as={List} gap="6" flexDirection={{ base: "column", xl: "row" }}>
           {featuresInfo.map((feature, index) => {
             const { iconSrc, title, description } = feature;
             return (
@@ -47,15 +47,14 @@ export function FeaturesSection() {
                 as={ListItem}
                 borderRadius="8px"
                 flexDirection={{ base: "column", md: "row", xl: "column" }}
-                rowGap={{ base: "14", md: "0", xl: "14" }}
-                columnGap="14"
+                gap="ms-2"
                 bg="brand.500"
                 padding={{
                   base: "58px 24px",
                   md: "42px 48px 42px 48px",
                   xl: "72px 48px 56px",
                 }}
-                maxW="xl"
+                maxW={{ base: "md", md: "xl" }}
                 data-sal={index % 2 && isLessThan1280 ? "flip-down" : "flip-up"}
                 data-sal-duration="1000"
               >
@@ -66,7 +65,7 @@ export function FeaturesSection() {
                 >
                   <Image src={`/images/home/features/${iconSrc}`} alt="" fill />
                 </Center>
-                <Stack spacing="4" textAlign={{ md: "left", xl: "center" }}>
+                <Stack spacing="ms-1" textAlign={{ md: "left", xl: "center" }}>
                   <Heading as="h3" size="xl" textTransform="capitalize">
                     {title}
                   </Heading>
@@ -75,7 +74,7 @@ export function FeaturesSection() {
               </Center>
             );
           })}
-        </Stack>
+        </Center>
       </Box>
     </MainSection>
   );

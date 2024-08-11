@@ -12,21 +12,16 @@ export const components: Record<string, StyleConfig> = {
         lineHeight: "clamp(3rem, 2.3vw + 2.5rem, 4.5rem)",
       },
       "2xl": {
-        fontSize: "clamp(1.728rem, 1vw + 1.5rem, 2.369rem)",
+        fontSize: ["xl", null, "2xl", null, null, "3xl"],
         lineHeight: "3rem",
       },
       xl: {
-        fontSize: "xl",
-        lineHeight: "1.5",
+        fontSize: "lg",
+        lineHeight: "1",
       },
     },
     defaultProps: {
       size: "2xl",
-    },
-  },
-  Text: {
-    baseStyle: {
-      maxWidth: "444px",
     },
   },
   Button: {
