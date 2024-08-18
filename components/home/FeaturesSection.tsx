@@ -66,7 +66,7 @@ export function FeaturesSection() {
                   <Image src={`/images/home/features/${iconSrc}`} alt="" fill />
                 </Center>
                 <Stack spacing="ms-1" textAlign={{ md: "left", xl: "center" }}>
-                  <Heading as="h3" size="xl" textTransform="capitalize">
+                  <Heading as="h3" size="lg" textTransform="capitalize">
                     {title}
                   </Heading>
                   <Text>{description}</Text>

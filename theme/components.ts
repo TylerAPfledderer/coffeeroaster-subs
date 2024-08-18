@@ -13,9 +13,13 @@ export const components: Record<string, StyleConfig> = {
       },
       "2xl": {
         fontSize: ["xl", null, "2xl", null, null, "3xl"],
-        lineHeight: "3rem",
+        lineHeight: "2",
       },
       xl: {
+        fontSize: ["xl", null, null, null, "2xl"],
+        lineHeight: ["1.5", null, null, null, "2"],
+      },
+      lg: {
         fontSize: "lg",
         lineHeight: "1",
       },

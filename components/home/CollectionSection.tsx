@@ -85,7 +85,7 @@ export function CollectionSection() {
               >
                 <Heading
                   as="h3"
-                  size="xl"
+                  size="lg"
                   textTransform="capitalize"
                   // mb={{ base: "4", md: "6" }}
                 >

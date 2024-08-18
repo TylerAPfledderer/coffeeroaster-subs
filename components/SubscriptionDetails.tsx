@@ -39,7 +39,7 @@ export function SubscriptionDetails({
       borderRadius="10px"
       paddingX={{
         ...(onSubscribePage && { base: "24px", md: "42px" }),
-        xl: "88px",
+        lg: "88px",
       }}
       paddingY={onSubscribePage && "88px"}
       marginX={{
@@ -65,6 +65,7 @@ export function SubscriptionDetails({
         spacing={{ base: "72px", md: "0" }}
         direction={{ base: "column", md: "row" }}
         alignItems={{ base: "center", md: "normal" }}
+        w="full"
       >
         {subDetails.map((detail) => {
           const { step, title, description } = detail;
@@ -78,7 +79,8 @@ export function SubscriptionDetails({
               position="relative"
               paddingTop={{ md: "72px", xl: "96px" }}
               maxWidth="380px"
-              paddingRight={{ xl: "84px !important" }}
+              paddingRight={{ md: "2", lg: "84px !important" }}
+              _last={{ paddingRight: { lg: "0 !important" } }}
               // Creates the circle in the upper left of the list item
               _before={{
                 md: {
@@ -100,30 +102,34 @@ export function SubscriptionDetails({
                 },
               }}
             >
-              <Text
-                color="accentPrimary.500"
-                fontFamily="heading"
-                fontSize="72px"
-                fontWeight="bold"
-                lineHeight="1"
-                marginBottom={{ md: "24px" }}
-                maxWidth="100%"
-              >
-                {
-                  // Add a 0 in front of the iterated number
-                  `0${step}`
-                }
-              </Text>
-              <Heading
-                as="h3"
-                size="xl"
-                marginBottom="6"
-                lineHeight="1.5"
-                width={{ md: "206px" }}
-              >
-                {title}
-              </Heading>
-              <Text>{description}</Text>
+              <Stack spacing={{ base: "6", md: "10" }}>
+                <Text
+                  color="accentPrimary.500"
+                  fontFamily="heading"
+                  fontSize="72px"
+                  fontWeight="bold"
+                  lineHeight="100%"
+                  maxWidth="100%"
+                >
+                  {
+                    // Add a 0 in front of the iterated number
+                    `0${step}`
+                  }
+                </Text>
+                <Stack spacing="6">
+                  <Heading
+                    as="h3"
+                    size="xl"
+                    maxW={{ md: "223px", xl: "255px" }}
+                    sx={{
+                      textWrap: "balance",
+                    }}
+                  >
+                    {title}
+                  </Heading>
+                  <Text>{description}</Text>
+                </Stack>
+              </Stack>
             </Flex>
           );
         })}

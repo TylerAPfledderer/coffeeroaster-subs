@@ -13,11 +13,9 @@ import {
   SpaceProps,
   Text,
   useToast,
-  VisuallyHidden,
 } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import type { FormOptionWithPrice } from "@/data/formOptionDetails";
-import useChakraBreakpointComponent from "../../hooks/useChakraBreakpointComponent";
 import OrderSummary from "./OrderSummary";
 import { useFormValuesContext } from "./form-value-context";
 
@@ -66,12 +64,6 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currInputVals["delivery-interval"]]);
 
-  /**
-   * Rendered wrapper component that hides its child elements when the screen is larger than the given breakpoint,
-   * but is still visible to screen readers
-   */
-  const HiddenAboveMD = useChakraBreakpointComponent("md", VisuallyHidden, Box);
-
   /** Passed to the PaddingX prop in the `ModalHeader`, `ModalBody`, and `ModalFooter` components */
   const modalPaddingX: SpaceProps["paddingX"] = {
     base: "24px",
@@ -109,7 +101,7 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
           paddingY="6"
           paddingX={modalPaddingX}
         >
-          <Heading>Order Summary</Heading>
+          <Heading size="xl">Order Summary</Heading>
         </ModalHeader>
         <ModalBody
           paddingTop="40px"
@@ -129,8 +121,8 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
           paddingBottom={{ base: "24px", md: "54px" }}
         >
           <Show above="md">
-            <Heading as={Text} flex="1" fontSize="32px" aria-hidden>
-              <span>{deliveryPrice}</span> / mo
+            <Heading as="span" flex="1" fontSize="2rem" aria-hidden>
+              {deliveryPrice} / mo
             </Heading>
           </Show>
           <Button
@@ -144,9 +136,9 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             onClick={handleSubmitCheckout}
           >
             Checkout
-            <HiddenAboveMD>
+            <Box hideFrom="md">
               &nbsp;- <span>{deliveryPrice}</span> / mo
-            </HiddenAboveMD>
+            </Box>
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -33,7 +33,14 @@ const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
   );
 
   return (
-    <Heading as={Text} size="xl" maxWidth="none" {...props} ref={ref}>
+    <Heading
+      as={Text}
+      fontSize="xl"
+      lineHeight="2"
+      maxWidth="none"
+      {...props}
+      ref={ref}
+    >
       {"\u201CI drink my coffee as "}
       <OrderHighlight>{drinkingStyle}</OrderHighlight>
       {", with a "}
