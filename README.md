@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Coffeeroasters subscription site solution
 
-## Getting Started
+This project comes from the [Coffeeroasters subscription site challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/coffeeroasters-subscription-site-5Fc26HVY6). It has been altered to provide improved interpretation of vertical rhythm and typescale principles in the design.
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Frontend Mentor - Coffeeroasters subscription site solution](#frontend-mentor---coffeeroasters-subscription-site-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Screenshot](#screenshot)
+  - [Built with](#built-with)
+  - [Author](#author)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This is a design-to-code project to showcase products in a subscription-based e-commerce site. The featured functionality is a form containing your options when setting up the subscription, up until the point of starting a "checkout" process. For the the purposes of this project, the checkout will simply reset the options. Persistant state on refresh with Local Storage is provided.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Users should be able to:
 
-## Learn More
+- View the optimal layout for each page depending on their device's screen size
+- See hover states for all interactive elements throughout the site
+- Make selections to create a coffee subscription and see an order summary modal of their choices
+  - Once the user selects the "Checkout" button on the modal, a confirmation toast appears, and the selections reset to the default values.
 
-To learn more about Next.js, take a look at the following resources:
+### Screenshot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![](./screenshot.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Live Site URL: [https://coffeeroaster-subs.vercel.app/](https://coffeeroaster-subs.vercel.app/)
 
-## Deploy on Vercel
+## Built with
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Chakra UI](https://www.chakra-ui.com) CSS-in-JS UI component library with accessibility standards
+- [NextJS](https://nextjs.org/) - React Meta framework
+- Mobile-first workflow
+- TypeScript
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Author
+
+- Website - [Tyler Pfledderer](https://tylerpweb.dev)
+- Linkedin - [https://linkedin.com/in/tyler-pfledderer](https://linkedin.com/in/tyler-pfledderer)
