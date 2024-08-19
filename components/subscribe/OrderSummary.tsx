@@ -1,27 +1,21 @@
-import { type ReactNode } from "react";
 import {
-  chakra,
   forwardRef,
   Heading,
   HeadingProps,
+  Mark,
   Text,
+  useHighlight,
 } from "@chakra-ui/react";
 import { kebabToNormalString } from "../../utils/functions";
 import { useFormValuesContext } from "./form-value-context";
 
-/**
- * Reusable Support wrapper for providing a highlighting style to the dynamic content rendered in the `SubscribeOrderSummary` component
- */
-const OrderHighlight = ({ children }: { children: ReactNode }) => (
-  <chakra.span color="brand.500">{children}</chakra.span>
-);
 /**
  * Component that renders the details of the subscription order.
  * - Pulls in context from the values updated in the form.
  * - Has Chakra props forwarded to change styling between the page and modal instances.
  */
 const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
-  const { currInputVals } = useFormValuesContext();
+  const { currInputVals, isCapsuleSelected } = useFormValuesContext();
 
   // The values displayed in the order summary
   const drinkingStyle = kebabToNormalString(currInputVals["drinking-style"]);
@@ -32,6 +26,11 @@ const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
     currInputVals["delivery-interval"],
   );
 
+  const summaryChunks = useHighlight({
+    text: `${"\u201C"}I drink my coffee as ${drinkingStyle}, with a ${coffeeType} type of bean. ${coffeeSize} ${!isCapsuleSelected && `ground ala ${beanStyle}`}, sent to me ${deliveryInterval}.${"\u201D"}`,
+    query: [drinkingStyle, coffeeType, coffeeSize, beanStyle, deliveryInterval],
+  });
+
   return (
     <Heading
       as={Text}
@@ -41,17 +40,15 @@ const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
       {...props}
       ref={ref}
     >
-      {"\u201CI drink my coffee as "}
-      <OrderHighlight>{drinkingStyle}</OrderHighlight>
-      {", with a "}
-      <OrderHighlight>{coffeeType}</OrderHighlight>
-      {" type of bean. "}
-      <OrderHighlight>{coffeeSize}</OrderHighlight>
-      {" ground ala "}
-      <OrderHighlight>{beanStyle}</OrderHighlight>
-      {", sent to me "}
-      <OrderHighlight>{deliveryInterval}</OrderHighlight>
-      {".\u201D"}
+      {summaryChunks.map(({ match, text }) => {
+        if (!match) return text;
+
+        return (
+          <Mark key={text} color="brand.500">
+            {text}
+          </Mark>
+        );
+      })}
     </Heading>
   );
 });

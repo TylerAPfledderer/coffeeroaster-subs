@@ -14,6 +14,7 @@ interface FormValuesCtxProps {
   setCurrInputVals: Dispatch<SetStateAction<Record<string, string>>>;
   formOptionDetails: typeof formOptionDetails;
   resetInputVals: () => void;
+  isCapsuleSelected: boolean;
 }
 
 export const FormValuesContext = createContext<FormValuesCtxProps | null>(null);

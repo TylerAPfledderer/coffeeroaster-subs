@@ -10,7 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import useCurrentInputValues from "@/hooks/useCurrentInputValue";
-import { formOptionDetails } from "@/data/formOptionDetails";
+import {
+  formOptionDetails,
+  type CurrValOptions,
+} from "@/data/formOptionDetails";
 import OrderSummary from "./OrderSummary";
 import SubscribFormItem from "./SubscribeFormItem";
 import MainSection from "../MainSection";
@@ -37,7 +40,7 @@ const SubscribeForm = () => {
    * State for the currently selected values in each radio group, stored in local storage
    */
   const [currInputVals, setCurrInputVals, resetInputVals] =
-    useCurrentInputValues<Record<string, string>>(
+    useCurrentInputValues<Record<CurrValOptions, string>>(
       "currentInputVals",
       reduceDefaultOptionNames(),
     );
@@ -49,6 +52,7 @@ const SubscribeForm = () => {
       setCurrInputVals,
       formOptionDetails,
       resetInputVals,
+      isCapsuleSelected: currInputVals["drinking-style"] === "capsule",
     }),
     [currInputVals, resetInputVals, setCurrInputVals],
   );
