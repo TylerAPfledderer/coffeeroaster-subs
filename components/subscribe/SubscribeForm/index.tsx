@@ -14,11 +14,11 @@ import {
   formOptionDetails,
   type CurrValOptions,
 } from "@/data/formOptionDetails";
-import OrderSummary from "./OrderSummary";
-import SubscribFormItem from "./SubscribeFormItem";
-import MainSection from "../MainSection";
-import CheckoutModal from "./CheckoutModal";
-import { FormValuesContext } from "./form-value-context";
+import OrderSummary from "../OrderSummary";
+import SubscribFormItem from "../SubscribeFormItem";
+import MainSection from "../../MainSection";
+import CheckoutModal from "../CheckoutModal";
+import { FormValuesContext } from "../form-value-context";
 
 /**
  * Form for the subscription options

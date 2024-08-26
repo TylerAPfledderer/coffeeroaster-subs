@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import featuresInfo from "@/data/featuresInfo.json";
-import MainSection from "../MainSection";
+import MainSection from "../../MainSection";
 
 export function FeaturesSection() {
   // For use with collectionInfo and featureInfo scroll reveals

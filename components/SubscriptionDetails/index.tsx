@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import subDetails from "@/data/subDetails.json";
 import { Flex, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import MainSection from "./MainSection";
+import MainSection from "../MainSection";
+import { useRouter } from "next/router";
 
 type SubscriptionDetailsProps = {
   /**
@@ -21,9 +22,10 @@ type SubscriptionDetailsProps = {
 export function SubscriptionDetails({
   onSubscribePage,
 }: SubscriptionDetailsProps) {
+  const { asPath } = useRouter();
   useEffect(() => {
     /** Throw runtime error if the onSubscribePage prop is not used in the correct place */
-    if (onSubscribePage && window.location.pathname !== "/subscribe") {
+    if (onSubscribePage && asPath !== "/subscribe") {
       throw new Error(
         "onSubscribePage styles and rendering are only for the Subscribe page!",
       );
