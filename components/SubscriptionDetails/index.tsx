@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import subDetails from "@/data/subDetails.json";
 import { Flex, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import MainSection from "../MainSection";
 import { useRouter } from "next/router";
+import MainSection from "../MainSection";
 
 type SubscriptionDetailsProps = {
   /**
