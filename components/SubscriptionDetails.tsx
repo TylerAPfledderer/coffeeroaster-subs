@@ -17,8 +17,6 @@ type SubscriptionDetailsProps = {
 
 /**
  * Component that provides details on how the subscription process works.
- *
- * @param {true | undefined} props.onSubscribePage - Used for styling changes if the component is rendered on the subscribe page
  */
 export function SubscriptionDetails({
   onSubscribePage,
