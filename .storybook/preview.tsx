@@ -1,6 +1,6 @@
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import type { Preview } from "@storybook/react";
-import customTheme from "../theme";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const preview: Preview = {
   parameters: {
@@ -13,11 +13,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ChakraProvider theme={customTheme}>
-        <Box textAlign="center" layerStyle="layoutBase">
-          <Story />
-        </Box>
-      </ChakraProvider>
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
     ),
   ],
 };

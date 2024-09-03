@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
   Heading,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Show,
-  SpaceProps,
   Text,
-  useToast,
+  createToaster,
 } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import type { FormOptionWithPrice } from "@/data/formOptionDetails";
+import type { SystemProperties } from "node_modules/@chakra-ui/react/dist/types/styled-system/generated/system.gen";
 import OrderSummary from "./OrderSummary";
 import { useFormValuesContext } from "./form-value-context";
 
@@ -33,7 +32,9 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
 
   const [deliveryPrice, setDeliveryPrice] = useState<string | undefined>("0");
 
-  const confirmationToast = useToast();
+  const confirmToaster = createToaster({
+    placement: "bottom",
+  });
 
   // Update visual rendering of the price
   // when the 'delivery-interval' value changes
@@ -65,7 +66,7 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   }, [currInputVals["delivery-interval"]]);
 
   /** Passed to the PaddingX prop in the `ModalHeader`, `ModalBody`, and `ModalFooter` components */
-  const modalPaddingX: SpaceProps["paddingX"] = {
+  const modalPaddingX: SystemProperties["px"] = {
     base: "24px",
     md: "56px",
   };
@@ -77,33 +78,39 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   const handleSubmitCheckout = () => {
     resetInputVals();
     onClose();
-    confirmationToast({
+    confirmToaster.create({
       title: "Order Confirmed!",
       description: "Your order has been placed and will be delivered shortly.",
-      status: "success",
+      type: "success",
       duration: 5000,
-      isClosable: true,
     });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
-      <ModalOverlay zIndex="modal" />
-      <ModalContent
+    <DialogRoot
+      open={isOpen}
+      onOpenChange={({ open }) => {
+        if (open) onClose();
+      }}
+      centered
+      size="xl"
+    >
+      <DialogBackdrop zIndex="modal" />
+      <DialogContent
         borderRadius="8px"
         overflow="hidden"
         marginX="16px"
         marginY="0"
       >
-        <ModalHeader
+        <DialogHeader
           background="darkGray.500"
           color="white"
           paddingY="6"
           paddingX={modalPaddingX}
         >
           <Heading size="xl">Order Summary</Heading>
-        </ModalHeader>
-        <ModalBody
+        </DialogHeader>
+        <DialogBody
           paddingTop="40px"
           paddingX={modalPaddingX}
           paddingBottom={{ base: "32px", md: "54px" }}
@@ -114,17 +121,22 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             selection if something is off. Subscription discount codes can also
             be redeemed at the checkout.
           </Text>
-        </ModalBody>
-        <ModalFooter
+        </DialogBody>
+        <DialogFooter
           paddingX={modalPaddingX}
           paddingTop="0"
           paddingBottom={{ base: "24px", md: "54px" }}
         >
-          <Show above="md">
-            <Heading as="span" flex="1" fontSize="2rem" aria-hidden>
-              {deliveryPrice} / mo
-            </Heading>
-          </Show>
+          <Heading
+            as="span"
+            hideBelow="md"
+            flex="1"
+            fontSize="2rem"
+            aria-hidden
+          >
+            {deliveryPrice} / mo
+          </Heading>
+
           <Button
             type="submit"
             colorScheme="brand"
@@ -140,9 +152,9 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               &nbsp;- <span>{deliveryPrice}</span> / mo
             </Box>
           </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </DialogFooter>
+      </DialogContent>
+    </DialogRoot>
   );
 };
 

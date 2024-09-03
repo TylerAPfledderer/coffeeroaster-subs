@@ -1,15 +1,23 @@
-export const layerStyles = {
+import { defineLayerStyles } from "@chakra-ui/react";
+
+export const layerStyles = defineLayerStyles({
   layoutBase: {
-    paddingX: { base: "6", md: "42px", lg: "80px" },
-    maxWidth: "1440px",
-    marginX: "auto",
+    value: {
+      paddingInline: { base: "6", md: "42px", lg: "80px" },
+      maxWidth: "1440px",
+      marginInline: "auto",
+    },
   },
   navOpened: {
-    maxHeight: "full",
-    opacity: "1",
+    value: {
+      maxHeight: "full",
+      opacity: "1",
+    },
   },
   navClosed: {
-    maxHeight: "0",
-    opacity: "0",
+    value: {
+      maxHeight: "0",
+      opacity: "0",
+    },
   },
-};
+});

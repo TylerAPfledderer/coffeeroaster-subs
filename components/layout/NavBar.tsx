@@ -1,13 +1,12 @@
-import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { LuX, LuMenu } from "react-icons/lu";
 import {
   Box,
-  Button,
   Container,
   Flex,
-  useDisclosure,
-  useMediaQuery,
+  IconButton,
   VisuallyHidden,
 } from "@chakra-ui/react";
+import { useDisclosure, useMediaQuery } from "@chakra-ui/hooks";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import NavList from "./NavList";
@@ -18,8 +17,10 @@ import NavList from "./NavList";
  */
 function NavBar() {
   // Toggling Nav Menu (on the small screen)
-  const { isOpen: isMenuOpen, onToggle: setMenuToggle } = useDisclosure();
-  const [isGreaterThan768] = useMediaQuery("(min-width: 768px)");
+  const { open: isMenuOpen, onToggle: setMenuToggle } = useDisclosure();
+  const [isGreaterThan768] = useMediaQuery(["(min-width: 768px)"], {
+    fallback: [false],
+  });
 
   // Check for client to be mounted (hydration)
   const [mounted, setMounted] = useState(false);
@@ -46,20 +47,24 @@ function NavBar() {
         <Box w={{ base: "162px", md: "235px" }}>
           <Logo />
         </Box>
-        <Button
+        <IconButton
           bg="transparent"
-          display={{ md: "none" }}
+          hideFrom="md"
           onClick={setMenuToggle}
           aria-expanded={isMenuOpen}
+          color="gray.800"
+          fontSize="lg"
+          _hover={{ bg: "gray.500", color: "white" }}
+          _expanded={{ bg: "gray.500", color: "white" }}
           data-testid="nav-button"
         >
           <VisuallyHidden>Main Menu</VisuallyHidden>
           {isMenuOpen ? (
-            <CloseIcon data-testid="close-nav-icon" />
+            <LuX data-testid="close-nav-icon" />
           ) : (
-            <HamburgerIcon data-testid="open-nav-icon" />
+            <LuMenu data-testid="open-nav-icon" />
           )}
-        </Button>
+        </IconButton>
         <Container
           as="nav"
           position={{ base: "fixed", md: "static" }}
@@ -84,7 +89,7 @@ function NavBar() {
             textTransform="uppercase"
             direction={{ base: "column", md: "row" }}
             alignItems="center"
-            spacing="8"
+            gap="8"
             fontSize={{ base: "24px", md: "16px" }}
             fontWeight={{ md: "bold" }}
             color={{ md: "darkGray.500" }}

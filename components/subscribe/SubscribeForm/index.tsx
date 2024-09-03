@@ -4,9 +4,8 @@ import {
   Box,
   HStack,
   VStack,
-  Accordion,
-  useDisclosure,
   Heading,
+  AccordionRoot,
 } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import useCurrentInputValues from "@/hooks/useCurrentInputValue";
@@ -14,6 +13,7 @@ import {
   formOptionDetails,
   type CurrValOptions,
 } from "@/data/formOptionDetails";
+import { useDisclosure } from "@chakra-ui/hooks";
 import OrderSummary from "../OrderSummary";
 import SubscribFormItem from "../SubscribeFormItem";
 import MainSection from "../../MainSection";
@@ -44,7 +44,7 @@ const SubscribeForm = () => {
       "currentInputVals",
       reduceDefaultOptionNames(),
     );
-  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { open: isOpen, onClose, onToggle } = useDisclosure();
 
   const formValuesCtxValue = useMemo(
     () => ({
@@ -67,27 +67,26 @@ const SubscribeForm = () => {
       >
         <FormValuesContext.Provider value={formValuesCtxValue}>
           <Box>
-            <Accordion
-              as={VStack}
-              spacing="96px"
-              alignItems="normal"
-              allowMultiple
-              defaultIndex={[0]}
+            <AccordionRoot
+              multiple
+              defaultValue={[formOptionDetails[0].radioGroupDetails.groupName]}
             >
-              {
-                // Iterate the Form option data from query to the form item components
-                formOptionDetails.map((option) => {
-                  const { name, radioGroupDetails } = option;
-                  return (
-                    <SubscribFormItem
-                      key={JSON.stringify(option)}
-                      heading={name}
-                      radioGroup={radioGroupDetails}
-                    />
-                  );
-                })
-              }
-            </Accordion>
+              <VStack gap="96px" alignItems="normal">
+                {
+                  // Iterate the Form option data from query to the form item components
+                  formOptionDetails.map((option) => {
+                    const { name, radioGroupDetails } = option;
+                    return (
+                      <SubscribFormItem
+                        key={JSON.stringify(option)}
+                        heading={name}
+                        radioGroup={radioGroupDetails}
+                      />
+                    );
+                  })
+                }
+              </VStack>
+            </AccordionRoot>
             <Box
               background="darkGray.500"
               textAlign="left"
@@ -111,7 +110,10 @@ const SubscribeForm = () => {
             </Box>
             <Button
               variant="solid"
-              colorScheme="brand"
+              bg="brand.500"
+              size="lg"
+              fontFamily="heading"
+              fontWeight="700"
               mt="56px"
               px="36px"
               py="24px"

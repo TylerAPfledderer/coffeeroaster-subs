@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  Heading,
-  HeadingProps,
-  Mark,
-  Text,
-  useHighlight,
-} from "@chakra-ui/react";
+import { HeadingProps, Mark, Text, useHighlight } from "@chakra-ui/react";
 import { kebabToNormalString } from "../../utils/functions";
 import { useFormValuesContext } from "./form-value-context";
 
@@ -14,7 +7,7 @@ import { useFormValuesContext } from "./form-value-context";
  * - Pulls in context from the values updated in the form.
  * - Has Chakra props forwarded to change styling between the page and modal instances.
  */
-const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
+const SubscribeOrderSummary = (props: HeadingProps) => {
   const { currInputVals, isCapsuleSelected } = useFormValuesContext();
 
   // The values displayed in the order summary
@@ -32,13 +25,14 @@ const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
   });
 
   return (
-    <Heading
-      as={Text}
+    <Text
+      as="span"
+      fontFamily="heading"
       fontSize="xl"
+      fontWeight="700"
       lineHeight="2"
       maxWidth="none"
       {...props}
-      ref={ref}
     >
       {summaryChunks.map(({ match, text }) => {
         if (!match) return text;
@@ -49,8 +43,8 @@ const SubscribeOrderSummary = forwardRef<HeadingProps, "p">((props, ref) => {
           </Mark>
         );
       })}
-    </Heading>
+    </Text>
   );
-});
+};
 
 export default SubscribeOrderSummary;

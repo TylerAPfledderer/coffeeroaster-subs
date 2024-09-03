@@ -14,9 +14,9 @@ export const getStaticProps = (() => {
     description:
       "Build a subscription plan that best fits your needs. We offer an assortment of the best artisan coffees from around the globe delivered fresh to your door.",
     imageSet: {
-      base: blackCupMobile.src,
-      md: blackCupTablet.src,
-      xl: blackCupDesktop.src,
+      base: `url(${blackCupMobile.src})`,
+      md: `url(${blackCupTablet.src})`,
+      xl: `url(${blackCupDesktop.src})`,
     },
   };
 

@@ -1,11 +1,5 @@
-import { Link } from "@chakra-ui/next-js";
-import {
-  forwardRef,
-  List,
-  ListItem,
-  Stack,
-  StackProps,
-} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Link, ListItem, ListRoot, Stack, StackProps } from "@chakra-ui/react";
 
 interface NavLinkProps {
   name: string;
@@ -13,18 +7,22 @@ interface NavLinkProps {
 }
 
 function NavListLink({ name, path }: NavLinkProps) {
-  return <ListItem>
-    <Link
-      href={path}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="44px"
-      textUnderlineOffset="2px"
-    >
-      {name}
-    </Link>
-  </ListItem>
+  return (
+    <ListItem>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      <Link
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="44px"
+        textUnderlineOffset="2px"
+        color="inherit"
+        asChild
+      >
+        <NextLink href={path}>{name}</NextLink>
+      </Link>
+    </ListItem>
+  );
 }
 
 /**
@@ -38,12 +36,14 @@ function NavListLink({ name, path }: NavLinkProps) {
  * - Use forwardRef to get the ref to the internal Chakra components. Pass the props equal to the parent component.
  */
 
-const NavList = forwardRef<StackProps, typeof List>((props, ref) => (
-  <Stack as={List} {...props} ref={ref} aria-label="Main Navigation">
-    <NavListLink name="Home" path="/" />
-    <NavListLink name="About Us" path="/about" />
-    <NavListLink name="Create Your Plan" path="/subscribe" />
+const NavList = (props: StackProps) => (
+  <Stack {...props} asChild>
+    <ListRoot aria-label="Main Navigation" listStyle="none">
+      <NavListLink name="Home" path="/" />
+      <NavListLink name="About Us" path="/about" />
+      <NavListLink name="Create Your Plan" path="/subscribe" />
+    </ListRoot>
   </Stack>
-));
+);
 
 export default NavList;
