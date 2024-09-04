@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEventHandler } from "react";
 import {
   Box,
   Button,
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
+  DialogTrigger,
   Heading,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Show,
-  SpaceProps,
   Text,
-  useToast,
+  createToaster,
 } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import type { FormOptionWithPrice } from "@/data/formOptionDetails";
+import type { SystemProperties } from "node_modules/@chakra-ui/react/dist/types/styled-system/generated/system.gen";
 import OrderSummary from "./OrderSummary";
 import { useFormValuesContext } from "./form-value-context";
 
@@ -24,16 +25,17 @@ import { useFormValuesContext } from "./form-value-context";
  *
  * For the purposes of this project, the button on click will only reset the form values and state
  */
-const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
-  isOpen,
-  onClose,
-}) => {
+const CheckoutModal = () => {
   const { formOptionDetails, currInputVals, resetInputVals } =
     useFormValuesContext();
 
   const [deliveryPrice, setDeliveryPrice] = useState<string | undefined>("0");
 
-  const confirmationToast = useToast();
+  const [open, setOpen] = useState(false);
+
+  const confirmToaster = createToaster({
+    placement: "bottom",
+  });
 
   // Update visual rendering of the price
   // when the 'delivery-interval' value changes
@@ -65,7 +67,7 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   }, [currInputVals["delivery-interval"]]);
 
   /** Passed to the PaddingX prop in the `ModalHeader`, `ModalBody`, and `ModalFooter` components */
-  const modalPaddingX: SpaceProps["paddingX"] = {
+  const modalPaddingX: SystemProperties["px"] = {
     base: "24px",
     md: "56px",
   };
@@ -74,75 +76,102 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
    * Callback to "checkout" which actually closes the modal
    * and resets the radio groups to their default selections
    */
-  const handleSubmitCheckout = () => {
+  const handleSubmitCheckout: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
     resetInputVals();
-    onClose();
-    confirmationToast({
+    setOpen(false);
+    confirmToaster.create({
       title: "Order Confirmed!",
       description: "Your order has been placed and will be delivered shortly.",
-      status: "success",
+      type: "success",
       duration: 5000,
-      isClosable: true,
     });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
-      <ModalOverlay zIndex="modal" />
-      <ModalContent
-        borderRadius="8px"
-        overflow="hidden"
-        marginX="16px"
-        marginY="0"
-      >
-        <ModalHeader
-          background="darkGray.500"
-          color="white"
-          paddingY="6"
-          paddingX={modalPaddingX}
+    <DialogRoot
+      centered
+      size="xl"
+      lazyMount
+      open={open}
+      onOpenChange={(e) => setOpen(e.open)}
+    >
+      <DialogTrigger asChild>
+        <Button
+          variant="solid"
+          bg="brand.500"
+          size="lg"
+          fontFamily="heading"
+          fontWeight="700"
+          mt="56px"
+          px="36px"
+          py="24px"
         >
-          <Heading size="xl">Order Summary</Heading>
-        </ModalHeader>
-        <ModalBody
-          paddingTop="40px"
-          paddingX={modalPaddingX}
-          paddingBottom={{ base: "32px", md: "54px" }}
+          Create my plan!
+        </Button>
+      </DialogTrigger>
+      <DialogBackdrop zIndex="modal" />
+      <DialogPositioner>
+        <DialogContent
+          borderRadius="8px"
+          overflow="hidden"
+          marginX="16px"
+          marginY="0"
         >
-          <OrderSummary color="gray.500" />
-          <Text marginTop="16px">
-            Is this correct? You can proceed to checkout or go back to plan
-            selection if something is off. Subscription discount codes can also
-            be redeemed at the checkout.
-          </Text>
-        </ModalBody>
-        <ModalFooter
-          paddingX={modalPaddingX}
-          paddingTop="0"
-          paddingBottom={{ base: "24px", md: "54px" }}
-        >
-          <Show above="md">
-            <Heading as="span" flex="1" fontSize="2rem" aria-hidden>
+          <DialogHeader
+            background="darkGray.500"
+            color="white"
+            paddingY="6"
+            paddingX={modalPaddingX}
+          >
+            <Heading size="xl">Order Summary</Heading>
+          </DialogHeader>
+          <DialogBody
+            paddingTop="40px"
+            paddingX={modalPaddingX}
+            paddingBottom={{ base: "32px", md: "54px" }}
+          >
+            <OrderSummary color="gray.500" />
+            <Text marginTop="16px">
+              Is this correct? You can proceed to checkout or go back to plan
+              selection if something is off. Subscription discount codes can
+              also be redeemed at the checkout.
+            </Text>
+          </DialogBody>
+          <DialogFooter
+            paddingX={modalPaddingX}
+            paddingTop="0"
+            paddingBottom={{ base: "24px", md: "54px" }}
+          >
+            <Heading
+              as="span"
+              hideBelow="md"
+              flex="1"
+              fontSize="2rem"
+              aria-hidden
+            >
               {deliveryPrice} / mo
             </Heading>
-          </Show>
-          <Button
-            type="submit"
-            colorScheme="brand"
-            w="full"
-            height="auto"
-            paddingY="16px"
-            flex="1"
-            title={`Checkout with the total cost of ${deliveryPrice} per month`}
-            onClick={handleSubmitCheckout}
-          >
-            Checkout
-            <Box hideFrom="md">
-              &nbsp;- <span>{deliveryPrice}</span> / mo
-            </Box>
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+
+            <Button
+              type="submit"
+              colorScheme="brand"
+              w="full"
+              height="auto"
+              paddingY="16px"
+              flex="1"
+              title={`Checkout with the total cost of ${deliveryPrice} per month`}
+              onClick={handleSubmitCheckout}
+            >
+              Checkout
+              <Box hideFrom="md">
+                &nbsp;- <span>{deliveryPrice}</span> / mo
+              </Box>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogPositioner>
+    </DialogRoot>
   );
 };
 

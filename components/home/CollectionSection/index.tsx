@@ -1,28 +1,25 @@
-import {
-  Heading,
-  List,
-  ListItem,
-  Stack,
-  Text,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Heading, ListItem, ListRoot, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import collectionInfo from "@/data/collectionInfo.json";
+import { useMediaQuery } from "@chakra-ui/hooks";
 import MainSection from "../../MainSection";
 
 export function CollectionSection() {
   // For use with collectionInfo and featureInfo scroll reveals
-  const [isLessThan1280] = useMediaQuery("(max-width: 1280px)");
+  const [isLessThan1280] = useMediaQuery(["(max-width: 1280px)"], {
+    fallback: [false],
+  });
 
   return (
     <MainSection>
       <Heading
         bgGradient={{
-          base: "linear(gray.500 50%, transparent)",
-          md: "linear(gray.500 25%, transparent)",
-          xl: "linear(gray.500 50%, transparent)",
+          base: "linear-gradient(var(--chakra-colors-gray-500) 50%, transparent)",
+          md: "linear-gradient(var(--chakra-colors-gray-500) 25%, transparent)",
+          xl: "linear-gradient(var(--chakra-colors-gray-500) 50%, transparent)",
         }}
         bgColor="transparent"
+        color="transparent"
         bgClip="text"
         fill="transparent"
         filter={{
@@ -40,8 +37,8 @@ export function CollectionSection() {
         Our Collection
       </Heading>
       <Stack
-        as={List}
-        spacing={{ base: "ms-4", xl: "ms-2" }}
+        as={ListRoot}
+        gap={{ base: "ms-4", xl: "ms-2" }}
         overflow="visible"
         maxWidth="full"
         mt={{ md: "ms-2", xl: "ms-4" }}

@@ -4,7 +4,7 @@ import {
   Flex,
   HStack,
   Icon,
-  List,
+  ListRoot,
   ListItem,
   Link,
   VisuallyHidden,
@@ -70,7 +70,7 @@ function Footer() {
       marginTop={{ base: "32", md: "36" }}
       marginBottom="72px"
       background="darkGray.500"
-      padding={{ base: "54", xl: "48px 88px" }}
+      padding={{ base: "54px", xl: "48px 88px" }}
     >
       <Box
         width={{ base: "216.92px", md: "235px" }}
@@ -83,14 +83,15 @@ function Footer() {
         color="gray.500"
         marginBottom={{ base: "6", md: "12", xl: 0 }}
         direction={{ base: "column", md: "row" }}
-        spacing={{ base: "2", md: "8" }}
+        gap={{ base: "2", md: "8" }}
         marginLeft={{ xl: "48px" }}
       />
       <HStack
-        as={List}
+        as={ListRoot}
         justifyContent="center"
         marginLeft={{ xl: "auto" }}
         aria-label="Social Links"
+        listStyle="none"
       >
         {socialLinks.map(({ name, svgPath, id }) => {
           /**
@@ -109,18 +110,18 @@ function Footer() {
           return (
             <ListItem key={id}>
               <Center
-                as={Link}
-                isExternal
                 boxSize="44px"
                 padding="10px"
-                href="#"
                 _hover={hoverFocusStyles}
                 _focus={hoverFocusStyles}
+                asChild
               >
-                <VisuallyHidden>{name}</VisuallyHidden>
-                <Icon viewBox="0 0 24 24" boxSize="full">
-                  {svgPath}
-                </Icon>
+                <Link href="https://example.com" target="_blank">
+                  <VisuallyHidden>{name}</VisuallyHidden>
+                  <Icon viewBox="0 0 24 24" boxSize="full">
+                    {svgPath}
+                  </Icon>
+                </Link>
               </Center>
             </ListItem>
           );

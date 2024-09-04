@@ -1,11 +1,12 @@
 import {
   AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
   Box,
-  FormControl,
+  AccordionItemTrigger,
+  AccordionItemIndicator,
+  AccordionItemContent,
+  FieldRoot,
 } from "@chakra-ui/react";
+import { LuChevronDown } from "react-icons/lu";
 import SubscribeRadioGroup, { RadioGroupProps } from "./SubscribeRadioGroup";
 import { useFormValuesContext } from "./form-value-context";
 
@@ -22,11 +23,12 @@ const SubscribFormItem = ({ heading, radioGroup }: SubscribeFormItemProps) => {
 
   return (
     <AccordionItem
+      value={radioGroup.groupName}
       border="none"
-      isDisabled={isCapsuleSelected && heading === "Want us to grind them?"}
+      disabled={isCapsuleSelected && heading === "Want us to grind them?"}
     >
       <h3>
-        <AccordionButton
+        <AccordionItemTrigger
           padding="0"
           justifyContent="space-between"
           color="gray.500"
@@ -34,14 +36,16 @@ const SubscribFormItem = ({ heading, radioGroup }: SubscribeFormItemProps) => {
           <Box textAlign="left" flexBasis="70%" fontWeight="bold">
             {heading}
           </Box>
-          <AccordionIcon color="brand.500" />
-        </AccordionButton>
+          <AccordionItemIndicator _icon={{ color: "brand.500" }}>
+            <LuChevronDown />
+          </AccordionItemIndicator>
+        </AccordionItemTrigger>
       </h3>
-      <AccordionPanel padding="0" marginTop="24px">
-        <FormControl as="fieldset">
+      <AccordionItemContent padding="0" marginTop="24px">
+        <FieldRoot as="fieldset">
           <SubscribeRadioGroup {...radioGroup} />
-        </FormControl>
-      </AccordionPanel>
+        </FieldRoot>
+      </AccordionItemContent>
     </AccordionItem>
   );
 };

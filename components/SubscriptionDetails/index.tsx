@@ -1,7 +1,15 @@
 import { useEffect } from "react";
 import subDetails from "@/data/subDetails.json";
-import { Flex, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/next-js";
+import {
+  Flex,
+  Heading,
+  Link,
+  ListItem,
+  ListRoot,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import MainSection from "../MainSection";
 
@@ -61,8 +69,8 @@ export function SubscriptionDetails({
         </Heading>
       )}
       <Stack
-        as={List}
-        spacing={{ base: "72px", md: "0" }}
+        as={ListRoot}
+        gap={{ base: "72px", md: "0" }}
         direction={{ base: "column", md: "row" }}
         alignItems={{ base: "center", md: "normal" }}
         w="full"
@@ -102,7 +110,7 @@ export function SubscriptionDetails({
                 },
               }}
             >
-              <Stack spacing={{ base: "6", md: "10" }}>
+              <Stack gap={{ base: "6", md: "10" }}>
                 <Text
                   color="accentPrimary.500"
                   fontFamily="heading"
@@ -116,12 +124,12 @@ export function SubscriptionDetails({
                     `0${step}`
                   }
                 </Text>
-                <Stack spacing="6">
+                <Stack gap="6">
                   <Heading
                     as="h3"
                     size="xl"
                     maxW={{ md: "223px", xl: "255px" }}
-                    sx={{
+                    css={{
                       textWrap: "balance",
                     }}
                   >
@@ -135,13 +143,15 @@ export function SubscriptionDetails({
         })}
       </Stack>
       {!onSubscribePage && (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <Link
-          href="/subscribe"
           mt={{ base: "20", md: "6", xl: "72px" }}
           alignSelf={{ base: "center", md: "flex-start" }}
+          // @ts-expect-error variant value not defined in intellisense
           variant="primaryButton"
+          asChild
         >
-          Create your plan
+          <NextLink href="/subscribe">Create your plan</NextLink>
         </Link>
       )}
     </MainSection>

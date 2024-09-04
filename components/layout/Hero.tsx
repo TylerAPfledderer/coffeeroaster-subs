@@ -1,5 +1,5 @@
-import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/next-js";
+import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 
 export interface HeroData {
@@ -37,20 +37,22 @@ function Hero({ heroData }: HeroProps) {
       marginTop="76px"
     >
       <Stack gap="ms-2" width="clamp(17.44rem, 20vw + 12.8rem, 30.75rem)">
-        <Stack spacing="ms-1">
+        <Stack gap="ms-1">
           <Heading as="h1" size="4xl">
             {title}
           </Heading>
           <Text>{description}</Text>
         </Stack>
         {asPath === "/" && (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <Link
             alignSelf={{ base: "center", md: "flex-start" }}
-            href="/subscribe"
             data-testid="hero-button"
+            // @ts-expect-error variant value not defined in intellisense
             variant="primaryButton"
+            asChild
           >
-            Create your plan
+            <NextLink href="/subscribe">Create your plan</NextLink>
           </Link>
         )}
       </Stack>

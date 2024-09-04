@@ -9,18 +9,17 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "theme": "npx @chakra-ui/cli@3.0.0-next.20 typegen ./theme/index.ts"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/next-js": "^2.2.0",
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "framer-motion": "^11.3.21",
-    "next": "14.2.1",
+    "@chakra-ui/hooks": "3.0.0-next.21",
+    "@chakra-ui/react": "3.0.0-next.21",
+    "@emotion/react": "^11.13.3",
+    "next": "14.2.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-uuid": "^2.0.0",
     "sal.js": "^0.8.5"
   },
