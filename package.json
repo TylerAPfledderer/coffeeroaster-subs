@@ -13,8 +13,8 @@
     "theme": "npx @chakra-ui/cli@3.0.0-next.20 typegen ./theme/index.ts"
   },
   "dependencies": {
-    "@chakra-ui/hooks": "3.0.0-next.20",
-    "@chakra-ui/react": "https://pkg.pr.new/chakra-ui/chakra-ui/@chakra-ui/react@8787",
+    "@chakra-ui/hooks": "3.0.0-next.21",
+    "@chakra-ui/react": "3.0.0-next.21",
     "@emotion/react": "^11.13.3",
     "next": "14.2.7",
     "react": "^18.3.1",
