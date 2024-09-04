@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEventHandler } from "react";
 import {
   Box,
   Button,
@@ -7,7 +7,9 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogPositioner,
   DialogRoot,
+  DialogTrigger,
   Heading,
   Text,
   createToaster,
@@ -23,14 +25,13 @@ import { useFormValuesContext } from "./form-value-context";
  *
  * For the purposes of this project, the button on click will only reset the form values and state
  */
-const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
-  isOpen,
-  onClose,
-}) => {
+const CheckoutModal = () => {
   const { formOptionDetails, currInputVals, resetInputVals } =
     useFormValuesContext();
 
   const [deliveryPrice, setDeliveryPrice] = useState<string | undefined>("0");
+
+  const [open, setOpen] = useState(false);
 
   const confirmToaster = createToaster({
     placement: "bottom",
@@ -75,9 +76,10 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
    * Callback to "checkout" which actually closes the modal
    * and resets the radio groups to their default selections
    */
-  const handleSubmitCheckout = () => {
+  const handleSubmitCheckout: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
     resetInputVals();
-    onClose();
+    setOpen(false);
     confirmToaster.create({
       title: "Order Confirmed!",
       description: "Your order has been placed and will be delivered shortly.",
@@ -88,72 +90,87 @@ const CheckoutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
 
   return (
     <DialogRoot
-      open={isOpen}
-      onOpenChange={({ open }) => {
-        if (open) onClose();
-      }}
       centered
       size="xl"
+      lazyMount
+      open={open}
+      onOpenChange={(e) => setOpen(e.open)}
     >
+      <DialogTrigger asChild>
+        <Button
+          variant="solid"
+          bg="brand.500"
+          size="lg"
+          fontFamily="heading"
+          fontWeight="700"
+          mt="56px"
+          px="36px"
+          py="24px"
+        >
+          Create my plan!
+        </Button>
+      </DialogTrigger>
       <DialogBackdrop zIndex="modal" />
-      <DialogContent
-        borderRadius="8px"
-        overflow="hidden"
-        marginX="16px"
-        marginY="0"
-      >
-        <DialogHeader
-          background="darkGray.500"
-          color="white"
-          paddingY="6"
-          paddingX={modalPaddingX}
+      <DialogPositioner>
+        <DialogContent
+          borderRadius="8px"
+          overflow="hidden"
+          marginX="16px"
+          marginY="0"
         >
-          <Heading size="xl">Order Summary</Heading>
-        </DialogHeader>
-        <DialogBody
-          paddingTop="40px"
-          paddingX={modalPaddingX}
-          paddingBottom={{ base: "32px", md: "54px" }}
-        >
-          <OrderSummary color="gray.500" />
-          <Text marginTop="16px">
-            Is this correct? You can proceed to checkout or go back to plan
-            selection if something is off. Subscription discount codes can also
-            be redeemed at the checkout.
-          </Text>
-        </DialogBody>
-        <DialogFooter
-          paddingX={modalPaddingX}
-          paddingTop="0"
-          paddingBottom={{ base: "24px", md: "54px" }}
-        >
-          <Heading
-            as="span"
-            hideBelow="md"
-            flex="1"
-            fontSize="2rem"
-            aria-hidden
+          <DialogHeader
+            background="darkGray.500"
+            color="white"
+            paddingY="6"
+            paddingX={modalPaddingX}
           >
-            {deliveryPrice} / mo
-          </Heading>
+            <Heading size="xl">Order Summary</Heading>
+          </DialogHeader>
+          <DialogBody
+            paddingTop="40px"
+            paddingX={modalPaddingX}
+            paddingBottom={{ base: "32px", md: "54px" }}
+          >
+            <OrderSummary color="gray.500" />
+            <Text marginTop="16px">
+              Is this correct? You can proceed to checkout or go back to plan
+              selection if something is off. Subscription discount codes can
+              also be redeemed at the checkout.
+            </Text>
+          </DialogBody>
+          <DialogFooter
+            paddingX={modalPaddingX}
+            paddingTop="0"
+            paddingBottom={{ base: "24px", md: "54px" }}
+          >
+            <Heading
+              as="span"
+              hideBelow="md"
+              flex="1"
+              fontSize="2rem"
+              aria-hidden
+            >
+              {deliveryPrice} / mo
+            </Heading>
 
-          <Button
-            type="submit"
-            colorScheme="brand"
-            w="full"
-            height="auto"
-            paddingY="16px"
-            flex="1"
-            title={`Checkout with the total cost of ${deliveryPrice} per month`}
-            onClick={handleSubmitCheckout}
-          >
-            Checkout
-            <Box hideFrom="md">
-              &nbsp;- <span>{deliveryPrice}</span> / mo
-            </Box>
-          </Button>
-        </DialogFooter>
-      </DialogContent>
+            <Button
+              type="submit"
+              colorScheme="brand"
+              w="full"
+              height="auto"
+              paddingY="16px"
+              flex="1"
+              title={`Checkout with the total cost of ${deliveryPrice} per month`}
+              onClick={handleSubmitCheckout}
+            >
+              Checkout
+              <Box hideFrom="md">
+                &nbsp;- <span>{deliveryPrice}</span> / mo
+              </Box>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogPositioner>
     </DialogRoot>
   );
 };

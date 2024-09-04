@@ -34,11 +34,13 @@ const SubscribeOrderSummary = (props: HeadingProps) => {
       maxWidth="none"
       {...props}
     >
-      {summaryChunks.map(({ match, text }) => {
+      {summaryChunks.map(({ match, text }, idx) => {
         if (!match) return text;
 
+        const key = `${text}-${idx}`;
+
         return (
-          <Mark key={text} color="brand.500">
+          <Mark key={key} color="brand.500">
             {text}
           </Mark>
         );

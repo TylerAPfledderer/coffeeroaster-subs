@@ -1,19 +1,11 @@
 import { useMemo } from "react";
-import {
-  Button,
-  Box,
-  HStack,
-  VStack,
-  Heading,
-  AccordionRoot,
-} from "@chakra-ui/react";
+import { Box, HStack, VStack, Heading, AccordionRoot } from "@chakra-ui/react";
 import { toKebabCase } from "@/utils/functions";
 import useCurrentInputValues from "@/hooks/useCurrentInputValue";
 import {
   formOptionDetails,
   type CurrValOptions,
 } from "@/data/formOptionDetails";
-import { useDisclosure } from "@chakra-ui/hooks";
 import OrderSummary from "../OrderSummary";
 import SubscribFormItem from "../SubscribeFormItem";
 import MainSection from "../../MainSection";
@@ -44,7 +36,6 @@ const SubscribeForm = () => {
       "currentInputVals",
       reduceDefaultOptionNames(),
     );
-  const { open: isOpen, onClose, onToggle } = useDisclosure();
 
   const formValuesCtxValue = useMemo(
     () => ({
@@ -108,21 +99,8 @@ const SubscribeForm = () => {
               </Heading>
               <OrderSummary color="white" />
             </Box>
-            <Button
-              variant="solid"
-              bg="brand.500"
-              size="lg"
-              fontFamily="heading"
-              fontWeight="700"
-              mt="56px"
-              px="36px"
-              py="24px"
-              onClick={onToggle}
-            >
-              Create my plan!
-            </Button>
+            <CheckoutModal />
           </Box>
-          <CheckoutModal isOpen={isOpen} onClose={onClose} />
         </FormValuesContext.Provider>
       </HStack>
     </MainSection>
