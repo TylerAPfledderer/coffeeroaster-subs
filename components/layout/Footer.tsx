@@ -118,8 +118,8 @@ function Footer() {
               >
                 <Link href="https://example.com" target="_blank">
                   <VisuallyHidden>{name}</VisuallyHidden>
-                  <Icon viewBox="0 0 24 24" boxSize="full">
-                    {svgPath}
+                  <Icon boxSize="full">
+                    <svg viewBox="0 0 24 24">{svgPath}</svg>
                   </Icon>
                 </Link>
               </Center>

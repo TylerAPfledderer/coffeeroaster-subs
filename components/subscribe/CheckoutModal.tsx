@@ -90,7 +90,7 @@ const CheckoutModal = () => {
 
   return (
     <DialogRoot
-      centered
+      placement="center"
       size="xl"
       lazyMount
       open={open}
