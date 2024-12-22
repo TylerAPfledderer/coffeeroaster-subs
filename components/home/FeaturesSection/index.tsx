@@ -7,10 +7,10 @@ import {
   Stack,
   Text,
   VStack,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import featuresInfo from "@/data/featuresInfo.json";
-import { useMediaQuery } from "@chakra-ui/hooks";
 import MainSection from "../../MainSection";
 
 export function FeaturesSection() {

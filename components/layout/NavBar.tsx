@@ -5,8 +5,9 @@ import {
   Flex,
   IconButton,
   VisuallyHidden,
+  useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react";
-import { useDisclosure, useMediaQuery } from "@chakra-ui/hooks";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import NavList from "./NavList";
@@ -79,7 +80,7 @@ function NavBar() {
           overflow="hidden"
           top="72px"
           left="0"
-          bgGradient="linear(#fff 50%, transparent)"
+          bgGradient="linear-gradient(#fff 50%, transparent)"
           transition="max-height .3s, opacity .5s"
           zIndex="overlay"
           layerStyle={isVisibleNav ? "navOpened" : "navClosed"}

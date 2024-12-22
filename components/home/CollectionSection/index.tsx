@@ -1,7 +1,13 @@
-import { Heading, ListItem, ListRoot, Stack, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  ListItem,
+  ListRoot,
+  Stack,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import collectionInfo from "@/data/collectionInfo.json";
-import { useMediaQuery } from "@chakra-ui/hooks";
 import MainSection from "../../MainSection";
 
 export function CollectionSection() {
