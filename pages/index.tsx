@@ -15,9 +15,9 @@ export const getStaticProps = (() => {
     description:
       "Start your mornings with the world’s best coffees. Try our expertly curated artisan coffees from our best roasters delivered directly to your door, at your schedule.",
     imageSet: {
-      base: coffeeMobileImg.src,
-      md: coffeeTabletImg.src,
-      xl: coffeeDesktopImg.src,
+      base: `url(${coffeeMobileImg.src})`,
+      md: `url(${coffeeTabletImg.src})`,
+      xl: `url(${coffeeDesktopImg.src})`,
     },
   };
 
@@ -31,12 +31,12 @@ export const getStaticProps = (() => {
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = () => (
-    <>
-      <CollectionSection />
-      <FeaturesSection />
-      <SubscriptionDetails />
-    </>
-  );
+  <>
+    <CollectionSection />
+    <FeaturesSection />
+    <SubscriptionDetails />
+  </>
+);
 
 Home.getLayout = function getLayout(page) {
   const { heroData } = page.props;

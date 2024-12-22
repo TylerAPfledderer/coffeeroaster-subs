@@ -1,4 +1,5 @@
-import { chakra, forwardRef, FlexProps } from "@chakra-ui/react";
+import { chakra, type HTMLChakraProps } from "@chakra-ui/react";
+import { forwardRef } from "react";
 
 /**
  * Wrapper component for the high-level section elements on each page.
@@ -7,7 +8,7 @@ import { chakra, forwardRef, FlexProps } from "@chakra-ui/react";
  *
  * Forwards chakra props from the parent for any specific cases with layout or color.
  */
-const MainSection = forwardRef<FlexProps, "section">(
+const MainSection = forwardRef<"section", HTMLChakraProps<"section">>(
   ({ children, ...props }, ref) => (
     <chakra.section
       position="relative"
@@ -22,5 +23,7 @@ const MainSection = forwardRef<FlexProps, "section">(
     </chakra.section>
   ),
 );
+
+MainSection.displayName = "MainSection";
 
 export default MainSection;

@@ -17,15 +17,15 @@ import {
   Center,
   Flex,
   Heading,
-  List,
+  Link,
   ListItem,
+  ListRoot,
   Stack,
   Text,
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
 import headquarterInfo from "@/data/headquarterInfo.json";
-import { Link } from "@chakra-ui/next-js";
 import type { NextPageWithLayout } from "./_app";
 
 export const getStaticProps = (() => {
@@ -34,9 +34,9 @@ export const getStaticProps = (() => {
     description:
       "Coffeeroasters began its journey of exotic discovery in 1999, highlighting stories of coffee from around the world. We have since been dedicated to bring the perfect cup - from bean to brew - in every shipment.",
     imageSet: {
-      base: whitecupMobile.src,
-      md: whitecupTablet.src,
-      xl: whitecupDesktop.src,
+      base: `url(${whitecupMobile.src})`,
+      md: `url(${whitecupTablet.src})`,
+      xl: `url(${whitecupDesktop.src})`,
     },
   };
 
@@ -68,7 +68,7 @@ const About: NextPageWithLayout<
         paddingX={{ lg: "48px", xl: "88px" }}
         justifyContent="space-between"
         flexDirection={{ base: "column", md: "row" }}
-        sx={{ "& > *": { flex: 1 } }}
+        css={{ "& > *": { flex: 1 } }}
       >
         <Box
           mb={{ base: "48px", md: 0 }}
@@ -132,7 +132,7 @@ const About: NextPageWithLayout<
           paddingX={{ base: "24px", md: "56px", xl: "88px" }}
           paddingBottom={{ base: "64px", xl: 0 }}
           width="full"
-          spacing="64px"
+          gap="64px"
           alignItems="center"
           justifyContent="space-between"
           direction={{ base: "column", xl: "row-reverse" }}
@@ -156,7 +156,7 @@ const About: NextPageWithLayout<
             />
           </Box>
           <VStack
-            spacing="6"
+            gap="6"
             textAlign={{ xl: "left" }}
             alignItems={{ xl: "flex-start" }}
           >
@@ -176,8 +176,7 @@ const About: NextPageWithLayout<
       {/* Headquarters section */}
       <MainSection paddingX={{ xl: "88px" }}>
         <Heading
-          fontSize="1.5rem"
-          lineHeight="32px"
+          size="lg"
           color="gray.500"
           marginBottom={{ base: "72px", md: "60px" }}
           alignSelf={{ md: "flex-start" }}
@@ -185,53 +184,50 @@ const About: NextPageWithLayout<
           Our headquarters
         </Heading>
         <Stack
-          as={List}
-          spacing={{ base: "88px", md: "72px" }}
+          as={ListRoot}
+          gap={{ base: "88px", md: "72px" }}
           direction={{ base: "column", md: "row" }}
           width="full"
+          listStyle="none"
         >
           {headquarterInfo.map((info) => {
             const { country, street, city, state, tel } = info;
             const svgName = country.toLowerCase().replace(/\s/g, "-");
             return (
-              <VStack
-                key={JSON.stringify(info)}
-                as={ListItem}
-                spacing="12"
-                alignItems={{ base: "center", md: "flex-start" }}
-                textAlign={{ md: "left" }}
-                flex="1"
-              >
-                <Center maxW="40px" flexBasis="48px" w="full">
-                  <Image
-                    alt=""
-                    src={`/images/about/headquarters/${svgName}.svg`}
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </Center>
-                <VStack spacing="6" alignItems="inherit">
-                  <Heading as="span" display="block">
-                    {country}
-                  </Heading>
-                  <Text>
-                    {street}
-                    <br />
-                    {city}
-                    <br />
-                    {state}
-                    <br />
-                    <Link href={`tel:${tel}`} isExternal>
-                      {tel}
-                    </Link>
-                  </Text>
+              <ListItem key={JSON.stringify(info)} flex="1">
+                <VStack
+                  gap="12"
+                  alignItems={{ base: "center", md: "flex-start" }}
+                  textAlign={{ md: "left" }}
+                >
+                  <Center maxW="40px" flexBasis="48px" w="full">
+                    <Image
+                      alt=""
+                      src={`/images/about/headquarters/${svgName}.svg`}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                  </Center>
+                  <VStack gap="6" alignItems="inherit">
+                    <Heading as="span" display="block">
+                      {country}
+                    </Heading>
+                    <Stack gap="0">
+                      <Text>{street}</Text>
+                      <Text>{city}</Text>
+                      <Text>{state}</Text>
+                      <Link href={`tel:${tel}`} target="_blank">
+                        {tel}
+                      </Link>
+                    </Stack>
+                  </VStack>
                 </VStack>
-              </VStack>
+              </ListItem>
             );
           })}
         </Stack>

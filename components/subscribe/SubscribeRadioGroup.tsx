@@ -1,4 +1,9 @@
-import { useRadioGroup, Text, Heading, Stack } from "@chakra-ui/react";
+import {
+  Text,
+  Stack,
+  RadioCardRoot,
+  RadioCardItemText,
+} from "@chakra-ui/react";
 import type { CurrValOptions } from "@/data/formOptionDetails";
 import SubscribeRadioCard from "./SubscribeRadioCard";
 import { toKebabCase } from "../../utils/functions";
@@ -29,43 +34,43 @@ const SubscribeRadioGroup = ({
 }: SubscribeRadioGroupProps) => {
   const { currInputVals, setCurrInputVals } = useFormValuesContext();
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: groupName,
-    onChange: (nextValue) => {
-      setCurrInputVals((prevState) => ({
-        ...prevState,
-        [groupName]: nextValue,
-      }));
-    },
-    // We are in controlled mode because this value can be reset by the user (via "Checkout")
-    value: toKebabCase(currInputVals[groupName]),
-  });
-
-  const group = getRootProps();
-
   return (
-    <Stack
-      {...group}
-      spacing={{ base: "16px", md: "8px" }}
-      direction={{ base: "column", md: "row" }}
+    <RadioCardRoot
+      // We are in controlled mode because this value can be reset by the user (via "Checkout")
+      value={toKebabCase(currInputVals[groupName])}
+      onValueChange={({ value: nextValue }) => {
+        setCurrInputVals((prevState) => ({
+          ...prevState,
+          [groupName]: nextValue,
+        }));
+      }}
+      name={groupName}
     >
-      {radioOptions.map(({ name, ariaHeadingLabel, description }) => {
-        const nameValue = name.toLowerCase().replace(/[' ']+/g, "-");
-        const radio = getRadioProps({ value: nameValue });
-        return (
-          <SubscribeRadioCard
-            key={nameValue}
-            {...radio}
-            ariaHeadingLabel={ariaHeadingLabel}
-          >
-            <Heading as="span" fontSize="24px">
-              {name}
-            </Heading>
-            <Text>{description}</Text>
-          </SubscribeRadioCard>
-        );
-      })}
-    </Stack>
+      <Stack
+        gap={{ base: "16px", md: "8px" }}
+        direction={{ base: "column", md: "row" }}
+      >
+        {radioOptions.map(({ name, ariaHeadingLabel, description }) => {
+          const nameValue = name.toLowerCase().replace(/[' ']+/g, "-");
+          return (
+            <SubscribeRadioCard
+              key={nameValue}
+              value={nameValue}
+              ariaHeadingLabel={ariaHeadingLabel}
+            >
+              <RadioCardItemText
+                fontFamily="heading"
+                fontWeight="700"
+                fontSize="24px"
+              >
+                {name}
+              </RadioCardItemText>
+              <Text fontSize="md">{description}</Text>
+            </SubscribeRadioCard>
+          );
+        })}
+      </Stack>
+    </RadioCardRoot>
   );
 };
 

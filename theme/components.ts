@@ -1,46 +1,43 @@
-import { type StyleConfig } from "@chakra-ui/react";
+import { defineRecipe, defineSlotRecipe } from "@chakra-ui/react";
 
-export const components: Record<string, StyleConfig> = {
-  Heading: {
-    sizes: {
+const heading = defineRecipe({
+  variants: {
+    size: {
       "4xl": {
-        fontSize: ["2xl", null, "3xl", null, null, "4xl"],
-        lineHeight: ["2", null, "2.5", null, null, "3.5"],
+        textStyle: "4xl",
       },
       "3xl": {
-        fontSize: "clamp(2.074rem, 1.6vw + 1.7rem, 3.157rem)",
-        lineHeight: "clamp(3rem, 2.3vw + 2.5rem, 4.5rem)",
+        textStyle: "3xl",
       },
       "2xl": {
-        fontSize: ["xl", null, "2xl", null, null, "3xl"],
-        lineHeight: "2",
+        textStyle: "2xl",
       },
       xl: {
-        fontSize: ["xl", null, null, null, "2xl"],
-        lineHeight: ["1.5", null, null, null, "2"],
+        textStyle: "xl",
       },
       lg: {
-        fontSize: "lg",
-        lineHeight: "1",
+        textStyle: "lg",
       },
     },
-    defaultProps: {
-      size: "2xl",
-    },
   },
-  Button: {
-    baseStyle: {
-      fontFamily: "heading",
-    },
+  defaultVariants: {
+    size: "2xl",
   },
-  Link: {
-    variants: {
+});
+
+const button = defineRecipe({
+  base: {
+    fontFamily: "heading",
+  },
+});
+
+const link = defineRecipe({
+  variants: {
+    variant: {
       primaryButton: {
-        alignItems: "center",
         backgroundColor: "brand.500",
         borderRadius: "md",
         color: "white",
-        display: "inline-flex",
         fontFamily: "heading",
         fontSize: "lg",
         fontWeight: "semiBold",
@@ -62,12 +59,18 @@ export const components: Record<string, StyleConfig> = {
       },
     },
   },
-  Accordion: {
-    baseStyle: {
-      button: {
-        fontSize: "clamp(1.44rem, 0.5vw + 1.3rem, 1.777rem)",
-        fontFamily: "heading",
-      },
+});
+
+const accordion = defineSlotRecipe({
+  slots: ["itemTrigger"],
+  base: {
+    itemTrigger: {
+      fontSize: "clamp(1.44rem, 0.5vw + 1.3rem, 1.777rem)",
+      fontFamily: "heading",
     },
   },
-};
+});
+
+export const recipes = { button, heading, link };
+
+export const slotRecipes = { accordion };
